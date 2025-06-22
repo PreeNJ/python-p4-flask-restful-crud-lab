@@ -1,7 +1,7 @@
 # server/routes.py
 
 from flask import Blueprint, request, jsonify, abort
-from models import db, Plant   # adjust if your import path is different
+from models import db, Plant    
 
 plants_bp = Blueprint('plants', __name__, url_prefix='/plants')
 
@@ -14,8 +14,7 @@ def update_plant(id):
     plant = Plant.query.get(id)
     if not plant:
         abort(404, description=f"Plant with id={id} not found")
-
-    # Update only the fields provided
+ 
     for field in ('name', 'image', 'price', 'is_in_stock'):
         if field in data:
             setattr(plant, field, data[field])
